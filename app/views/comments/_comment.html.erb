@@ -1,0 +1,27 @@
+<% show_post ||= false %>
+
+<% if session[:user_id] %>
+  <div class='row'>
+    <div class='span0 well text-center'>
+      <%= link_to vote_post_comment_path(comment.post, comment, vote: true), method: 'post' do %>
+        <i class='icon-arrow-up'></i>
+      <% end %>
+      <br />
+      <%= comment.total_votes %>
+      <br />
+      <%= link_to vote_post_comment_path(comment.post, comment, vote: false), method: 'post' do %>
+        <i class='icon-arrow-down'></i>
+      <% end %>
+    </div>
+  <% end %>
+
+  <div class='well span8'>
+    <em><%= comment.body %></em>
+    <% if show_post %>
+      on <%= link_to comment.post.title, post_path(comment.post) %>
+    <% end %>
+    <br />
+    <span class='quiet'>by</span> <%= comment.creator.username %>
+    <small>at <%= display_datetime(comment.created_at) %></small>
+  </div>
+</div>
